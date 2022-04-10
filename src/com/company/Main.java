@@ -18,7 +18,21 @@ import java.util.function.Supplier;
 public class Main {
 
     public static void main(String[] args) {
-        runPredicate();
+        int x = 7;
+        while (x < 100) {
+            if (x % 7 == 0){
+                System.out.print(x);
+                System.out.print(" ");
+            }
+            x++;
+        }
+        System.out.println();
+        for(int i=7; i < 100; i=i+7){
+            System.out.print(i);
+            System.out.print(" ");
+        }
+
+
     }
 
     public static void runDate() {
@@ -112,9 +126,9 @@ public class Main {
     public static void runConverter() {
         Converter<Integer, String> converterToString = new Converter<>();
         Converter<String, Integer> converterToInteger = new Converter<>();
-        List<Integer> integers = List.of(1, 2, 3, 4, 5);
-        List<String> convertedIntegers = converterToString.map(integers, To::toString);
-        System.out.println(integers);
+
+        List<String> convertedIntegers = converterToString.map(List.of(1, 2, 3, 4, 5),
+                To::toString);
         System.out.println(convertedIntegers);
 
         List<Integer> convertedStrings = converterToInteger.map(
@@ -123,12 +137,12 @@ public class Main {
     }
 }
 
-class To{
-    public static Integer toInt(String str){
+class To {
+    public static Integer toInt(String str) {
         return Integer.valueOf(str.replace(".", ""));
     }
 
-    public static String toString(Integer i){
+    public static String toString(Integer i) {
         return i + ".";
     }
 }
@@ -166,7 +180,7 @@ interface BufferedReaderProcessor {
     String process(BufferedReader bufferedReader) throws IOException;
 }
 
-class IntPredicate implements Predicate<Integer>{
+class IntPredicate implements Predicate<Integer> {
     @Override
     public boolean test(Integer integer) {
         return integer < 3;
